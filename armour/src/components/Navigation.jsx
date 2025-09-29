@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
+import { Button } from '@/components/ui/button'
 
 function Navigation() {
   const location = useLocation()
@@ -16,36 +17,30 @@ function Navigation() {
               React Router App
             </Link>
           </div>
-          <div className="flex items-center space-x-8">
-            <Link
-              to="/"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                isActive('/')
-                  ? 'bg-blue-500 text-white'
-                  : 'text-gray-700 hover:text-blue-500 hover:bg-blue-50'
-              }`}
-            >
-              Home
+          <div className="flex items-center space-x-4">
+            <Link to="/">
+              <Button
+                variant={isActive('/') ? "default" : "ghost"}
+                size="sm"
+              >
+                Home
+              </Button>
             </Link>
-            <Link
-              to="/about"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                isActive('/about')
-                  ? 'bg-blue-500 text-white'
-                  : 'text-gray-700 hover:text-blue-500 hover:bg-blue-50'
-              }`}
-            >
-              About
+            <Link to="/about">
+              <Button
+                variant={isActive('/about') ? "default" : "ghost"}
+                size="sm"
+              >
+                About
+              </Button>
             </Link>
-            <Link
-              to="/contact"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                isActive('/contact')
-                  ? 'bg-blue-500 text-white'
-                  : 'text-gray-700 hover:text-blue-500 hover:bg-blue-50'
-              }`}
-            >
-              Contact
+            <Link to="/contact">
+              <Button
+                variant={isActive('/contact') ? "default" : "ghost"}
+                size="sm"
+              >
+                Contact
+              </Button>
             </Link>
           </div>
         </div>
