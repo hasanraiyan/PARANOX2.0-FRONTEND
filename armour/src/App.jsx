@@ -1,13 +1,21 @@
 
 
-function App() {
+import { Routes, Route } from 'react-router-dom'
+import Navigation from './components/Navigation'
+import Home from './pages/Home'
+import About from './pages/About'
+import Contact from './pages/Contact'
 
+function App() {
   return (
-    <>
-     <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-    </>
+    <div className="App">
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </div>
   )
 }
 
