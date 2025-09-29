@@ -1,0 +1,20 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="180" height="180" rx="20" fill="#0A0A0A"/>
+
+  <!-- Outer shield shape -->
+  <path d="M90 20L35 35V85C35 125 57.5 155 90 165C122.5 155 145 125 145 85V35L90 20Z" fill="#00FFFF"/>
+
+  <!-- Inner shield detail -->
+  <path d="M90 30L45 42V82C45 115 62.5 140 90 150C117.5 140 135 115 135 82V42L90 30Z" fill="#0080FF"/>
+
+  <!-- Center protection core -->
+  <circle cx="90" cy="65" r="12" fill="#000000" stroke="#00FFFF" stroke-width="2"/>
+
+  <!-- Security elements -->
+  <rect x="82" y="58" width="16" height="7" rx="2" fill="#00FFFF"/>
+  <circle cx="75" cy="45" r="3" fill="#00FFFF" opacity="0.7"/>
+  <circle cx="105" cy="45" r="3" fill="#00FFFF" opacity="0.7"/>
+  <circle cx="75" cy="75" r="3" fill="#00FFFF" opacity="0.7"/>
+  <circle cx="105" cy="75" r="3" fill="#00FFFF" opacity="0.7"/>
+</svg>
