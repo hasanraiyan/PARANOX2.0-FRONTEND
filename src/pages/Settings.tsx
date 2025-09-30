@@ -207,7 +207,7 @@ const Settings = () => {
               </h2>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 sm:space-y-6">
               {[
                 { key: 'emailAlerts', title: 'Email Alerts', desc: 'Receive security alerts via email' },
                 { key: 'pushNotifications', title: 'Push Notifications', desc: 'Get instant security notifications' },
@@ -219,13 +219,13 @@ const Settings = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.4 + (index * 0.1), duration: 0.6 }}
-                  className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 sm:p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-all duration-300 border border-white/5 hover:border-white/10 gap-3 sm:gap-0"
+                  className="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-all duration-300 border border-white/5 hover:border-white/10"
                 >
-                  <div className="flex-1">
-                    <h3 className="text-white font-semibold text-sm sm:text-base">{item.title}</h3>
-                    <p className="text-white/70 text-xs sm:text-sm">{item.desc}</p>
+                  <div className="flex-1 min-w-0 pr-4">
+                    <h3 className="text-white font-semibold text-base sm:text-lg">{item.title}</h3>
+                    <p className="text-white/70 text-sm">{item.desc}</p>
                   </div>
-                  <div className="self-end sm:self-center">
+                  <div className="flex-shrink-0">
                     <Switch
                       checked={notifications[item.key as keyof typeof notifications]}
                       onCheckedChange={(checked) => handleNotificationToggle(item.key as keyof typeof notifications, checked)}
@@ -242,18 +242,18 @@ const Settings = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="glass-card rounded-3xl p-8 border-2 border-white/10 shadow-xl shadow-black/20"
+            className="rounded-xl shadow-md p-4 sm:p-6 bg-gradient-to-b from-gray-900 to-gray-800 border-2 border-white/10"
           >
-            <div className="flex items-center space-x-4 mb-8">
-              <div className="p-3 rounded-2xl bg-primary/20 border border-primary/30">
-                <Eye className="h-6 w-6 text-primary" />
+            <div className="flex items-center space-x-3 sm:space-x-4 mb-6 sm:mb-8">
+              <div className="p-2 sm:p-3 rounded-2xl bg-primary/20 border border-primary/30">
+                <Eye className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
               </div>
-              <h2 className="text-2xl font-cyber font-semibold text-white">
+              <h2 className="text-base sm:text-lg font-cyber font-semibold text-white">
                 Privacy & Data
               </h2>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {[
                 { key: 'dataCollection', title: 'Data Collection', desc: 'Allow data collection to improve security' },
                 { key: 'anonymousUsage', title: 'Anonymous Usage Statistics', desc: 'Share anonymous usage data' },
@@ -266,15 +266,17 @@ const Settings = () => {
                   transition={{ delay: 0.5 + (index * 0.1), duration: 0.6 }}
                   className="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-all duration-300 border border-white/5 hover:border-white/10"
                 >
-                  <div>
-                    <h3 className="text-white font-semibold text-lg">{item.title}</h3>
+                  <div className="flex-1 min-w-0 pr-4">
+                    <h3 className="text-white font-semibold text-base sm:text-lg">{item.title}</h3>
                     <p className="text-white/70 text-sm">{item.desc}</p>
                   </div>
-                  <Switch
-                    checked={privacy[item.key as keyof typeof privacy]}
-                    onCheckedChange={(checked) => handlePrivacyToggle(item.key as keyof typeof privacy, checked)}
-                    className="border-white/30"
-                  />
+                  <div className="flex-shrink-0">
+                    <Switch
+                      checked={privacy[item.key as keyof typeof privacy]}
+                      onCheckedChange={(checked) => handlePrivacyToggle(item.key as keyof typeof privacy, checked)}
+                      className="border-white/30"
+                    />
+                  </div>
                 </motion.div>
               ))}
             </div>
