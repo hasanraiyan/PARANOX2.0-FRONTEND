@@ -114,10 +114,10 @@ const Settings = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="rounded-xl shadow-md p-4 sm:p-6 bg-gradient-to-b from-gray-900 to-gray-800 border-2 border-white/10"
+            className="glass-card rounded-xl p-4 sm:p-6 border-2 border-white/10 shadow-xl shadow-black/20"
           >
             <div className="flex items-center space-x-3 sm:space-x-4 mb-6 sm:mb-8">
-              <div className="p-2 sm:p-3 rounded-2xl bg-primary/20 border border-primary/30">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
                 <User className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
               </div>
               <h2 className="text-base sm:text-lg font-cyber font-semibold text-white">
@@ -196,10 +196,10 @@ const Settings = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="rounded-xl shadow-md p-4 sm:p-6 bg-gradient-to-b from-gray-900 to-gray-800 border-2 border-white/10"
+            className="glass-card rounded-xl p-4 sm:p-6 border-2 border-white/10 shadow-xl shadow-black/20"
           >
             <div className="flex items-center space-x-3 sm:space-x-4 mb-6 sm:mb-8">
-              <div className="p-2 sm:p-3 rounded-2xl bg-primary/20 border border-primary/30">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
                 <Bell className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
               </div>
               <h2 className="text-base sm:text-lg font-cyber font-semibold text-white">
@@ -242,18 +242,18 @@ const Settings = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="rounded-xl shadow-md p-4 sm:p-6 bg-gradient-to-b from-gray-900 to-gray-800 border-2 border-white/10"
+            className="glass-card rounded-xl p-4 sm:p-6 border-2 border-white/10 shadow-xl shadow-black/20"
           >
             <div className="flex items-center space-x-3 sm:space-x-4 mb-6 sm:mb-8">
-              <div className="p-2 sm:p-3 rounded-2xl bg-primary/20 border border-primary/30">
-                <Eye className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+              <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
+                <Eye className="h-6 w-6 text-primary" />
               </div>
               <h2 className="text-base sm:text-lg font-cyber font-semibold text-white">
                 Privacy & Data
               </h2>
             </div>
 
-            <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-6">
               {[
                 { key: 'dataCollection', title: 'Data Collection', desc: 'Allow data collection to improve security' },
                 { key: 'anonymousUsage', title: 'Anonymous Usage Statistics', desc: 'Share anonymous usage data' },
@@ -267,7 +267,7 @@ const Settings = () => {
                   className="flex items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-all duration-300 border border-white/5 hover:border-white/10"
                 >
                   <div className="flex-1 min-w-0 pr-4">
-                    <h3 className="text-white font-semibold text-base sm:text-lg">{item.title}</h3>
+                    <h3 className="text-white font-semibold text-lg">{item.title}</h3>
                     <p className="text-white/70 text-sm">{item.desc}</p>
                   </div>
                   <div className="flex-shrink-0">
@@ -287,13 +287,13 @@ const Settings = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="glass-card rounded-3xl p-8 border-2 border-white/10 shadow-xl shadow-black/20"
+            className="glass-card rounded-xl p-4 sm:p-6 border-2 border-white/10 shadow-xl shadow-black/20"
           >
-            <div className="flex items-center space-x-4 mb-8">
-              <div className="p-3 rounded-2xl bg-primary/20 border border-primary/30">
+            <div className="flex items-center space-x-3 sm:space-x-4 mb-6 sm:mb-8">
+              <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
                 <Shield className="h-6 w-6 text-primary" />
               </div>
-              <h2 className="text-2xl font-cyber font-semibold text-white">
+              <h2 className="text-base sm:text-lg font-cyber font-semibold text-white">
                 Security
               </h2>
             </div>
@@ -327,13 +327,13 @@ const Settings = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="glass-card rounded-3xl p-8 border-2 border-white/10 shadow-xl shadow-black/20"
+            className="glass-card rounded-xl p-4 sm:p-6 border-2 border-white/10 shadow-xl shadow-black/20"
           >
-            <div className="flex items-center space-x-4 mb-8">
-              <div className="p-3 rounded-2xl bg-primary/20 border border-primary/30">
+            <div className="flex items-center space-x-3 sm:space-x-4 mb-6 sm:mb-8">
+              <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
                 <SettingsIcon className="h-6 w-6 text-primary" />
               </div>
-              <h2 className="text-2xl font-cyber font-semibold text-white">
+              <h2 className="text-base sm:text-lg font-cyber font-semibold text-white">
                 Account
               </h2>
             </div>
@@ -389,9 +389,9 @@ const Settings = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
-            className="glass-card rounded-3xl p-8 border-2 border-white/10 shadow-xl shadow-black/20"
+            className="glass-card rounded-xl p-4 sm:p-6 border-2 border-white/10 shadow-xl shadow-black/20"
           >
-            <h2 className="text-2xl font-cyber font-semibold text-white mb-6">
+            <h2 className="text-base sm:text-lg font-cyber font-semibold text-white mb-6">
               App Information
             </h2>
 
