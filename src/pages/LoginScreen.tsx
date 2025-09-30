@@ -51,10 +51,10 @@ const LoginScreen = () => {
       <div className="fixed inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/80 backdrop-blur-3xl -z-10"></div>
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,255,255,0.1),transparent_50%)] bg-[radial-gradient(circle_at_70%_80%,rgba(0,255,136,0.08),transparent_50%)] -z-10"></div>
 
-      <div className="flex-1 flex flex-col lg:flex-row items-center justify-center px-6 py-12 relative z-10 max-w-7xl mx-auto w-full min-h-[80vh]">
+      <div className="flex-1 flex flex-col lg:flex-row items-center justify-center px-4 sm:px-6 py-8 sm:py-12 relative z-10 max-w-7xl mx-auto w-full min-h-[80vh]">
         {/* Left Side - Features */}
         <motion.div
-          className="lg:w-1/2 lg:pr-12 text-center lg:text-left mb-12 lg:mb-0"
+          className="lg:w-1/2 lg:pr-12 text-center lg:text-left mb-8 sm:mb-12 lg:mb-0"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
@@ -62,33 +62,33 @@ const LoginScreen = () => {
           <div className="space-y-8">
             {/* Main Title */}
             <div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
                 <span className="bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
                   AI-Powered
                 </span>
                 <br />
                 <span className="text-white">Security</span>
               </h1>
-              <p className="text-xl text-white/80 mb-8 max-w-lg mx-auto lg:mx-0">
+              <p className="text-base sm:text-lg md:text-xl text-white/80 mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 px-2 sm:px-0">
                 Advanced cybersecurity protection powered by artificial intelligence
               </p>
             </div>
 
             {/* Feature Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 px-4 sm:px-0">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
-                className="glass-card rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105"
+                className="glass-card rounded-2xl p-4 sm:p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105"
               >
                 <div className="inline-flex p-3 rounded-xl bg-blue-500/20 mb-4 text-blue-400">
                   <Shield className="h-6 w-6" />
                 </div>
-                <h3 className="text-lg font-bold text-white mb-2">
+                <h3 className="text-base sm:text-lg font-bold text-white mb-2">
                   Phishing Detection
                 </h3>
-                <p className="text-white/70 text-sm leading-relaxed">
+                <p className="text-white/70 text-xs sm:text-sm leading-relaxed">
                   Real-time email & message scanning
                 </p>
               </motion.div>
@@ -149,7 +149,7 @@ const LoginScreen = () => {
 
         {/* Right Side - Login/Signup Form */}
         <motion.div
-          className="lg:w-1/2 max-w-lg w-full"
+          className="lg:w-1/2 w-full max-w-sm mx-auto px-4 lg:px-0 lg:max-w-lg"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -175,7 +175,7 @@ const LoginScreen = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
             <div className="flex justify-center mb-6">
               <div className="p-4 rounded-3xl bg-gradient-to-br from-primary/20 to-accent-password/20 backdrop-blur-sm border border-white/10">
@@ -195,7 +195,7 @@ const LoginScreen = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="glass-card rounded-3xl p-8 lg:p-10 border-2 border-white/10 shadow-2xl shadow-black/20 backdrop-blur-xl"
+            className="glass-card rounded-3xl p-6 sm:p-8 lg:p-10 border-2 border-white/10 shadow-2xl shadow-black/20 backdrop-blur-xl"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <motion.div
@@ -294,7 +294,7 @@ const LoginScreen = () => {
               >
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-primary to-accent-password hover:from-primary/90 hover:to-accent-password/90 text-white text-xl py-6 px-8 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-primary/30"
+                  className="w-full max-w-sm mx-auto bg-gradient-to-r from-primary to-accent-password hover:from-primary/90 hover:to-accent-password/90 text-white text-lg sm:text-xl py-4 sm:py-6 px-6 sm:px-8 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-primary/30 touch-manipulation"
                 >
                   {isLogin ? "Sign In" : "Create Account"}
                 </Button>
@@ -360,7 +360,7 @@ const LoginScreen = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.3, duration: 0.6 }}
-            className="text-sm text-white/60 text-center mt-8"
+            className="text-xs sm:text-sm text-white/60 text-center mt-6 sm:mt-8 px-4"
           >
             By continuing, you agree to our{" "}
             <a href="#" className="text-primary hover:text-accent-password transition-colors duration-300 underline">

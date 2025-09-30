@@ -142,81 +142,151 @@ const AlertsHistory = () => {
 
   return (
     <div className="min-h-screen bg-gradient-cyber">
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8 max-w-7xl">
         {/* Header */}
-        <div className="flex items-center mb-8">
-          <Button
-            onClick={() => navigate('/dashboard')}
-            variant="ghost"
-            size="icon"
-            className="mr-4 text-muted-foreground hover:text-white"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
-          <div className="flex-1">
-            <h1 className="text-2xl font-cyber font-bold text-white">
+        <div className="mb-4 sm:mb-6 lg:mb-8">
+          {/* Back Button */}
+          <div className="flex items-center mb-4">
+            <Button
+              onClick={() => navigate('/dashboard')}
+              variant="ghost"
+              size="icon"
+              className="text-muted-foreground hover:text-white touch-manipulation"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+          </div>
+          
+          {/* Title and Subtitle - Responsive Alignment */}
+          <div className="text-center sm:text-left">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-cyber font-bold text-white mb-2">
               Alerts & History
             </h1>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-sm sm:text-base">
               View your security alerts and activity history
             </p>
           </div>
         </div>
 
         {/* Search and Filter */}
-        <div className="glass-card rounded-2xl p-6 mb-6">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="relative flex-1">
+        <div className="glass-card rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
+          <div className="flex flex-col space-y-4 sm:space-y-0">
+            {/* Search Bar - Full width on mobile */}
+            <div className="relative w-full sm:max-w-md sm:mb-4 lg:mb-0">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Search alerts..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-input border-input-border focus:border-primary"
+                className="pl-10 bg-input border-input-border focus:border-primary text-sm sm:text-base w-full"
               />
             </div>
-            <div className="flex space-x-2">
-              {filterOptions.map((option) => (
-                <Button
-                  key={option.value}
-                  variant={selectedFilter === option.value ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setSelectedFilter(option.value)}
-                  className={
-                    selectedFilter === option.value
-                      ? "bg-primary text-primary-foreground"
-                      : "border-border hover:bg-secondary/50"
-                  }
-                >
-                  {option.label}
-                </Button>
-              ))}
+            
+            {/* Filter Tabs - Horizontal scrollable on mobile */}
+            <div className="w-full">
+              <div className="flex overflow-x-auto gap-2 pb-2 sm:pb-0 scrollbar-hide" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+                {filterOptions.map((option) => (
+                  <Button
+                    key={option.value}
+                    variant={selectedFilter === option.value ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedFilter(option.value)}
+                    className={`flex-shrink-0 whitespace-nowrap text-xs sm:text-sm transition-all duration-200 ${
+                      selectedFilter === option.value
+                        ? "bg-primary text-primary-foreground shadow-lg border-primary"
+                        : "border-border hover:bg-secondary/50 hover:border-primary/50"
+                    }`}
+                  >
+                    {option.label}
+                  </Button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Alerts List */}
-        <div className="space-y-4">
+        {/* Alerts List - Responsive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-3 sm:gap-4">
           {filteredAlerts.map((alert) => (
             <div
               key={alert.id}
-              className={`glass-card rounded-2xl p-6 border-l-4 ${getSeverityColor(alert.severity)} hover:bg-white/10 transition-colors`}
+              className={`glass-card rounded-xl p-4 sm:p-5 lg:p-6 border-l-4 ${getSeverityColor(alert.severity)} hover:bg-white/5 transition-all duration-300 w-full min-h-0`}
             >
-              <div className="flex items-start space-x-4">
-                <div className={getTypeColor(alert.type)}>
+              {/* Mobile Layout (≤640px) - Vertical Stack */}
+              <div className="flex flex-col sm:hidden space-y-3">
+                {/* Header with Icon and Status */}
+                <div className="flex items-start justify-between">
+                  <div className="flex items-start space-x-3 flex-1">
+                    <div className={`${getTypeColor(alert.type)} flex-shrink-0`}>
+                      {(() => {
+                        const Icon = getTypeIcon(alert.type);
+                        return <Icon className="h-5 w-5 mt-0.5" />;
+                      })()}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-sm font-cyber font-semibold text-white leading-tight mb-1">
+                        {alert.title}
+                      </h3>
+                    </div>
+                  </div>
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(alert.status)} flex-shrink-0 ml-2`}>
+                    {alert.status.toUpperCase()}
+                  </span>
+                </div>
+                
+                {/* Description */}
+                <p className="text-muted-foreground text-xs leading-relaxed">
+                  {alert.description}
+                </p>
+                
+                {/* Type & Severity Chips */}
+                <div className="flex flex-wrap gap-2">
+                  <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-black/30 ${getTypeColor(alert.type)}`}>
+                    {alert.type.charAt(0).toUpperCase() + alert.type.slice(1)}
+                  </span>
+                  <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-black/30 ${
+                    alert.severity === 'critical' ? 'text-accent-phishing' :
+                    alert.severity === 'high' ? 'text-accent-phishing/70' :
+                    alert.severity === 'medium' ? 'text-accent-safety' :
+                    'text-accent-password'
+                  }`}>
+                    {alert.severity.charAt(0).toUpperCase() + alert.severity.slice(1)}
+                  </span>
+                </div>
+                
+                {/* Timestamp and Action */}
+                <div className="flex items-center justify-between pt-2 border-t border-white/10">
+                  <span className="text-muted-foreground text-xs flex items-center">
+                    <Clock className="h-3 w-3 mr-1" />
+                    {alert.timestamp}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-primary hover:text-primary-glow text-xs px-3 py-1 h-auto touch-manipulation"
+                  >
+                    <Eye className="h-3 w-3 mr-1" />
+                    View Details
+                  </Button>
+                </div>
+              </div>
+
+              {/* Desktop/Tablet Layout (≥640px) - Horizontal */}
+              <div className="hidden sm:flex items-start space-x-4">
+                <div className={`${getTypeColor(alert.type)} flex-shrink-0`}>
                   {(() => {
                     const Icon = getTypeIcon(alert.type);
                     return <Icon className="h-6 w-6 mt-1" />;
                   })()}
                 </div>
                 
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-lg font-cyber font-semibold text-white">
+                    <h3 className="text-base lg:text-lg font-cyber font-semibold text-white leading-tight">
                       {alert.title}
                     </h3>
-                    <div className="flex items-center space-x-2">
-                      <span className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(alert.status)}`}>
+                    <div className="flex items-center space-x-2 flex-shrink-0 ml-4">
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(alert.status)}`}>
                         {alert.status.toUpperCase()}
                       </span>
                       <span className="text-muted-foreground text-xs flex items-center">
@@ -226,30 +296,31 @@ const AlertsHistory = () => {
                     </div>
                   </div>
                   
-                  <p className="text-muted-foreground mb-3">
+                  <p className="text-muted-foreground text-sm lg:text-base mb-3 leading-relaxed">
                     {alert.description}
                   </p>
                   
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <span className="text-xs text-muted-foreground">
-                        Type: <span className={getTypeColor(alert.type)}>{alert.type}</span>
+                    <div className="flex items-center space-x-4">
+                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-black/30 ${getTypeColor(alert.type)}`}>
+                        {alert.type.charAt(0).toUpperCase() + alert.type.slice(1)}
                       </span>
-                      <span className="text-xs text-muted-foreground">
-                        Severity: <span className={
-                          alert.severity === 'critical' ? 'text-accent-phishing' :
-                          alert.severity === 'high' ? 'text-accent-phishing/70' :
-                          alert.severity === 'medium' ? 'text-accent-safety' :
-                          'text-accent-password'
-                        }>{alert.severity}</span>
+                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-black/30 ${
+                        alert.severity === 'critical' ? 'text-accent-phishing' :
+                        alert.severity === 'high' ? 'text-accent-phishing/70' :
+                        alert.severity === 'medium' ? 'text-accent-safety' :
+                        'text-accent-password'
+                      }`}>
+                        {alert.severity.charAt(0).toUpperCase() + alert.severity.slice(1)}
                       </span>
                     </div>
                     
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-primary hover:text-primary-glow"
+                      className="text-primary hover:text-primary-glow flex items-center"
                     >
+                      <Eye className="h-4 w-4 mr-1" />
                       View Details
                     </Button>
                   </div>
@@ -260,12 +331,12 @@ const AlertsHistory = () => {
         </div>
 
         {filteredAlerts.length === 0 && (
-          <div className="glass-card rounded-2xl p-12 text-center">
-            <Bell className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg font-cyber font-semibold text-white mb-2">
+          <div className="glass-card rounded-xl p-6 sm:p-8 lg:p-12 text-center">
+            <Bell className="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-base sm:text-lg lg:text-xl font-cyber font-semibold text-white mb-2">
               No alerts found
             </h3>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground text-sm sm:text-base max-w-md mx-auto">
               {searchTerm || selectedFilter !== 'all' 
                 ? 'Try adjusting your search or filter criteria'
                 : 'All quiet on the security front!'}
@@ -274,33 +345,33 @@ const AlertsHistory = () => {
         )}
 
         {/* Summary Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-          <div className="glass-card rounded-xl p-4 text-center">
-            <div className="text-accent-phishing text-2xl font-bold">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-6 sm:mt-8">
+          <div className="glass-card rounded-xl p-4 sm:p-5 lg:p-6 text-center">
+            <div className="text-accent-phishing text-xl sm:text-2xl lg:text-3xl font-bold mb-1">
               {alerts.filter(a => a.status === 'blocked').length}
             </div>
-            <div className="text-muted-foreground text-sm">Threats Blocked</div>
+            <div className="text-muted-foreground text-xs sm:text-sm leading-tight">Threats blocked</div>
           </div>
           
-          <div className="glass-card rounded-xl p-4 text-center">
-            <div className="text-accent-safety text-2xl font-bold">
+          <div className="glass-card rounded-xl p-4 sm:p-5 lg:p-6 text-center">
+            <div className="text-accent-safety text-xl sm:text-2xl lg:text-3xl font-bold mb-1">
               {alerts.filter(a => a.status === 'flagged').length}
             </div>
-            <div className="text-muted-foreground text-sm">Issues Flagged</div>
+            <div className="text-muted-foreground text-xs sm:text-sm leading-tight">Issues flagged</div>
           </div>
           
-          <div className="glass-card rounded-xl p-4 text-center">
-            <div className="text-accent-password text-2xl font-bold">
+          <div className="glass-card rounded-xl p-4 sm:p-5 lg:p-6 text-center">
+            <div className="text-accent-password text-xl sm:text-2xl lg:text-3xl font-bold mb-1">
               {alerts.filter(a => a.status === 'resolved').length}
             </div>
-            <div className="text-muted-foreground text-sm">Issues Resolved</div>
+            <div className="text-muted-foreground text-xs sm:text-sm leading-tight">Issues resolved</div>
           </div>
           
-          <div className="glass-card rounded-xl p-4 text-center">
-            <div className="text-primary text-2xl font-bold">
+          <div className="glass-card rounded-xl p-4 sm:p-5 lg:p-6 text-center">
+            <div className="text-primary text-xl sm:text-2xl lg:text-3xl font-bold mb-1">
               {alerts.filter(a => a.severity === 'critical').length}
             </div>
-            <div className="text-muted-foreground text-sm">Critical Alerts</div>
+            <div className="text-muted-foreground text-xs sm:text-sm leading-tight">Critical alerts</div>
           </div>
         </div>
       </div>
