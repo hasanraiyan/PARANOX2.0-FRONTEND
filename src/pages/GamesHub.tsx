@@ -132,41 +132,50 @@ const GamesHub = () => {
     <div className="min-h-screen bg-gradient-cyber">
       <div className="container mx-auto px-6 py-8">
         {/* Header */}
-        <div className="flex items-center mb-8">
-          <Button
-            onClick={() => navigate('/dashboard')}
-            variant="ghost"
-            size="icon"
-            className="mr-4 text-muted-foreground hover:text-white"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
-          <div className="flex-1">
+        <div className="mb-8">
+          {/* Back Button */}
+          <div className="flex items-center mb-4">
+            <Button
+              onClick={() => navigate('/dashboard')}
+              variant="ghost"
+              size="icon"
+              className="text-muted-foreground hover:text-white"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+          </div>
+          
+          {/* Title and XP Badge - Horizontally Aligned */}
+          <div className="flex items-center justify-between mb-4">
             <h1 className="text-2xl font-cyber font-bold text-white">
               Cybersecurity Games Hub
             </h1>
+            <div className="glass-card rounded-full px-3 py-2 flex items-center space-x-2">
+              <Trophy className="h-4 w-4 text-accent-safety" />
+              <span className="text-white font-medium text-sm">{currentXP} XP</span>
+            </div>
+          </div>
+          
+          {/* Subtitle - Centered */}
+          <div className="text-center">
             <p className="text-muted-foreground text-sm">
               Learn cybersecurity through fun, interactive games
             </p>
-          </div>
-          <div className="glass-card rounded-full px-4 py-2 flex items-center space-x-2">
-            <Trophy className="h-5 w-5 text-accent-safety" />
-            <span className="text-white font-semibold">{currentXP} XP</span>
           </div>
         </div>
 
         {/* XP Progress */}
         <div className="glass-card rounded-2xl p-6 mb-8">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-lg font-cyber font-semibold text-white">
+            <h3 className="text-base font-cyber font-semibold text-white">
               Your Progress
             </h3>
-            <span className="text-muted-foreground text-sm">
+            <span className="text-muted-foreground text-xs">
               {currentXP}/{totalXP} XP to next level
             </span>
           </div>
           <Progress value={(currentXP / totalXP) * 100} className="mb-2" />
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground text-xs">
             Complete games to earn XP and unlock new challenges!
           </p>
         </div>
@@ -176,42 +185,44 @@ const GamesHub = () => {
           {games.map((game) => (
             <div
               key={game.id}
-              className={`glass-card rounded-2xl p-6 transition-all duration-300 hover:scale-105 ${
+              className={`glass-card rounded-2xl p-4 sm:p-5 transition-all duration-300 hover:scale-105 relative ${
                 game.locked ? 'opacity-60' : 'cursor-pointer'
               } ${game.completed ? 'feature-card-password' : 'hover:bg-white/10'}`}
             >
-              <div className="flex items-start justify-between mb-4">
+              {/* Difficulty Badge - Top Right Corner */}
+              <div className="absolute top-3 right-3">
+                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(game.difficulty)} bg-black/30 backdrop-blur-sm`}>
+                  {game.difficulty.toUpperCase()}
+                </span>
+              </div>
+
+              <div className="flex items-start justify-between mb-3">
                 <div className={`${game.locked ? 'text-muted-foreground' : 'text-primary'}`}>
                   {game.locked ? (
-                    <Lock className="h-8 w-8" />
+                    <Lock className="h-6 w-6 sm:h-7 sm:w-7" />
                   ) : game.completed ? (
-                    <Trophy className="h-8 w-8 text-accent-password" />
+                    <Trophy className="h-6 w-6 sm:h-7 sm:w-7 text-accent-password" />
                   ) : (
-                    <Gamepad2 className="h-8 w-8" />
+                    <Gamepad2 className="h-6 w-6 sm:h-7 sm:w-7" />
                   )}
                 </div>
-                <div className="flex items-center space-x-2">
-                  <span className={`text-xs font-medium ${getDifficultyColor(game.difficulty)}`}>
-                    {game.difficulty.toUpperCase()}
-                  </span>
-                  <div className="flex items-center space-x-1">
-                    <Star className="h-3 w-3 text-accent-safety" />
-                    <span className="text-xs text-white">{game.xp}</span>
-                  </div>
+                <div className="flex items-center space-x-1 mr-16">
+                  <Star className="h-3 w-3 text-accent-safety" />
+                  <span className="text-xs text-white font-medium">{game.xp} XP</span>
                 </div>
               </div>
               
-              <h3 className="text-lg font-cyber font-semibold text-white mb-2">
+              <h3 className="text-base sm:text-lg font-cyber font-semibold text-white mb-2 pr-16">
                 {game.title}
               </h3>
-              <p className="text-muted-foreground text-sm mb-4">
+              <p className="text-muted-foreground text-xs sm:text-sm mb-4">
                 {game.description}
               </p>
               
               <Button
                 onClick={() => playGame(game)}
                 disabled={game.locked}
-                className={`w-full ${
+                className={`w-full text-sm ${
                   game.completed 
                     ? 'bg-accent-password/20 text-accent-password hover:bg-accent-password/30' 
                     : game.locked
@@ -222,7 +233,7 @@ const GamesHub = () => {
                 {game.completed ? (
                   <>
                     <Trophy className="h-4 w-4 mr-2" />
-                    Completed
+                  Completed
                   </>
                 ) : game.locked ? (
                   <>
@@ -242,8 +253,8 @@ const GamesHub = () => {
 
         {/* Leaderboard */}
         <div className="glass-card rounded-2xl p-6">
-          <h3 className="text-lg font-cyber font-semibold text-white mb-4 flex items-center">
-            <Trophy className="h-5 w-5 mr-2 text-accent-safety" />
+          <h3 className="text-base sm:text-lg font-cyber font-semibold text-white mb-4 flex items-center">
+            <Trophy className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-accent-safety" />
             Leaderboard
           </h3>
           
@@ -251,33 +262,64 @@ const GamesHub = () => {
             {leaderboard.map((player) => (
               <div 
                 key={player.rank} 
-                className={`flex items-center space-x-4 p-3 rounded-lg transition-colors ${
+                className={`rounded-lg transition-colors min-h-[56px] p-3 sm:p-4 ${
                   player.name === 'You' ? 'bg-primary/10 border border-primary/20' : 'bg-white/5 hover:bg-white/10'
                 }`}
               >
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
-                  player.rank === 1 ? 'bg-accent-safety text-black' :
-                  player.rank === 2 ? 'bg-muted text-white' :
-                  player.rank === 3 ? 'bg-accent-phishing/30 text-white' :
-                  'bg-white/10 text-muted-foreground'
-                }`}>
-                  #{player.rank}
-                </div>
-                
-                <div className="flex-1">
-                  <div className="flex items-center space-x-2">
-                    <span className={`font-semibold ${player.name === 'You' ? 'text-primary' : 'text-white'}`}>
+                {/* Mobile Layout (≤640px) - Stacked */}
+                <div className="flex flex-col space-y-2 sm:hidden">
+                  {/* First Line: Rank + Username */}
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0 ${
+                      player.rank === 1 ? 'bg-accent-safety text-black' :
+                      player.rank === 2 ? 'bg-muted text-white' :
+                      player.rank === 3 ? 'bg-accent-phishing/30 text-white' :
+                      'bg-white/10 text-muted-foreground'
+                    }`}>
+                      #{player.rank}
+                    </div>
+                    <span className={`font-medium text-sm flex-1 min-w-0 ${player.name === 'You' ? 'text-primary' : 'text-white'}`} style={{fontSize: 'clamp(0.875rem, 2.5vw, 1rem)'}}>
                       {player.name}
                     </span>
-                    <span className={`px-2 py-0.5 rounded text-xs font-medium ${getBadgeColor(player.badge)}`}>
+                  </div>
+                  
+                  {/* Second Line: Level Badge + XP */}
+                  <div className="flex items-center justify-between pl-10">
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap ${getBadgeColor(player.badge)}`}>
                       {player.badge}
+                    </span>
+                    <span className="text-white font-medium text-sm whitespace-nowrap">
+                      {player.xp} XP
                     </span>
                   </div>
                 </div>
-                
-                <div className="flex items-center space-x-1">
-                  <Zap className="h-4 w-4 text-accent-safety" />
-                  <span className="text-white font-semibold">{player.xp}</span>
+
+                {/* Desktop Layout (≥640px) - Horizontal */}
+                <div className="hidden sm:flex items-center justify-between">
+                  {/* Left Side: Rank + Username */}
+                  <div className="flex items-center space-x-3 sm:space-x-4 flex-1 min-w-0">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 ${
+                      player.rank === 1 ? 'bg-accent-safety text-black' :
+                      player.rank === 2 ? 'bg-muted text-white' :
+                      player.rank === 3 ? 'bg-accent-phishing/30 text-white' :
+                      'bg-white/10 text-muted-foreground'
+                    }`}>
+                      #{player.rank}
+                    </div>
+                    <span className={`font-medium text-base flex-1 min-w-0 ${player.name === 'You' ? 'text-primary' : 'text-white'}`} style={{fontSize: 'clamp(0.875rem, 2vw, 1rem)'}}>
+                      {player.name}
+                    </span>
+                  </div>
+                  
+                  {/* Right Side: Level Badge + XP */}
+                  <div className="flex items-center space-x-3 flex-shrink-0">
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap ${getBadgeColor(player.badge)}`}>
+                      {player.badge}
+                    </span>
+                    <span className="text-white font-medium text-sm whitespace-nowrap">
+                      {player.xp} XP
+                    </span>
+                  </div>
                 </div>
               </div>
             ))}

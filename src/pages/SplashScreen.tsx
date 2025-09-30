@@ -81,10 +81,10 @@ const SplashScreen = () => {
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,255,255,0.1),transparent_50%)] bg-[radial-gradient(circle_at_70%_80%,rgba(0,255,136,0.08),transparent_50%)] -z-10"></div>
       {/* Navigation Bar */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/40 transition-all duration-500 hover:bg-black/70">
-        <div className="max-w-7xl mx-auto flex justify-between items-center py-4 px-6">
+        <div className="max-w-7xl mx-auto flex justify-between items-center py-3 px-4 sm:py-4 sm:px-6">
           <div className="flex items-center space-x-2">
-            <Shield className="h-8 w-8 text-primary drop-shadow-lg filter brightness-110" />
-            <span className="text-xl font-bold bg-gradient-to-r from-primary via-accent-password to-primary bg-clip-text text-transparent">CyberGuardian</span>
+            <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-primary drop-shadow-lg filter brightness-110" />
+            <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-primary via-accent-password to-primary bg-clip-text text-transparent">CyberGuardian</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -118,10 +118,10 @@ const SplashScreen = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMenu}
-            className="lg:hidden text-white/80 hover:text-primary transition-all duration-300 p-2 rounded-lg hover:bg-white/5 backdrop-blur-sm"
+            className="lg:hidden text-white/80 hover:text-primary transition-all duration-300 p-3 sm:p-2 rounded-lg hover:bg-white/5 backdrop-blur-sm touch-manipulation"
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={28} className="sm:w-6 sm:h-6" /> : <Menu size={28} className="sm:w-6 sm:h-6" />}
           </button>
         </div>
 
@@ -132,25 +132,25 @@ const SplashScreen = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden overflow-hidden mx-6 mb-4"
+              className="lg:hidden overflow-hidden mx-4 sm:mx-6 mb-4"
             >
               <div className="glass-card p-4 rounded-2xl border border-white/10">
                 <div className="flex flex-col space-y-4">
                   <button
                     onClick={() => scrollToSection('features')}
-                    className="text-white/80 hover:text-primary transition-all duration-300 text-left px-4 py-2 rounded-lg hover:bg-white/5"
+                    className="text-white/80 hover:text-primary transition-all duration-300 text-left px-4 py-3 rounded-lg hover:bg-white/5 text-lg touch-manipulation"
                   >
                     Features
                   </button>
                   <button
                     onClick={() => scrollToSection('about')}
-                    className="text-white/80 hover:text-primary transition-all duration-300 text-left px-4 py-2 rounded-lg hover:bg-white/5"
+                    className="text-white/80 hover:text-primary transition-all duration-300 text-left px-4 py-3 rounded-lg hover:bg-white/5 text-lg touch-manipulation"
                   >
                     About
                   </button>
                   <button
                     onClick={() => scrollToSection('contact')}
-                    className="text-white/80 hover:text-primary transition-all duration-300 text-left px-4 py-2 rounded-lg hover:bg-white/5"
+                    className="text-white/80 hover:text-primary transition-all duration-300 text-left px-4 py-3 rounded-lg hover:bg-white/5 text-lg touch-manipulation"
                   >
                     Contact
                   </button>
@@ -168,34 +168,34 @@ const SplashScreen = () => {
         <div className="absolute bottom-1/4 left-1/2 w-1.5 h-1.5 bg-accent-phishing/60 rounded-full" />
       </div>
 
-      <div className="flex-1 flex flex-col lg:flex-row items-center justify-center px-6 py-32 lg:py-40 relative z-10 max-w-7xl mx-auto w-full min-h-[90vh] pt-32 md:pt-40">
+      <div className="flex-1 flex flex-col lg:flex-row items-center justify-center px-4 sm:px-6 py-20 sm:py-32 lg:py-40 relative z-10 max-w-7xl mx-auto w-full min-h-[90vh] pt-24 sm:pt-32 md:pt-40">
         {/* Left Side - Text Content */}
         <motion.div 
-          className="lg:w-1/2 lg:pr-12 text-center lg:text-left mb-12 lg:mb-0"
+          className="lg:w-1/2 lg:pr-12 text-center lg:text-left mb-8 sm:mb-12 lg:mb-0"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-cyber font-bold text-white mb-8 mt-8 md:mt-12">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-cyber font-bold text-white mb-6 sm:mb-8 mt-4 sm:mt-8 md:mt-12">
             <span className="bg-gradient-primary bg-clip-text text-transparent">
               Cybersecurity
             </span>
             <br />
             <span className="text-white">Guardian</span>
           </h1>
-          <p className="text-xl text-muted-foreground font-body mb-10 max-w-lg mx-auto lg:mx-0">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground font-body mb-8 sm:mb-10 max-w-lg mx-auto lg:mx-0 px-2 sm:px-0">
             Your AI-powered cybersecurity assistant that protects you from online threats in real-time.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mt-4 px-4 sm:px-0">
             <Button
               onClick={() => navigate('/login')}
-              className="bg-gradient-primary hover:glow-primary btn-cyber text-lg py-6 px-8 font-semibold w-full sm:w-auto"
+              className="bg-gradient-primary hover:glow-primary btn-cyber text-base sm:text-lg py-4 sm:py-6 px-6 sm:px-8 font-semibold w-full sm:w-auto touch-manipulation"
             >
               Get Started
             </Button>
             <Button
               variant="outline"
-              className="text-white border-white/20 hover:bg-white/10 text-lg py-6 px-8 w-full sm:w-auto"
+              className="text-white border-white/20 hover:bg-white/10 text-base sm:text-lg py-4 sm:py-6 px-6 sm:px-8 w-full sm:w-auto touch-manipulation"
             >
               Learn More
             </Button>
@@ -204,13 +204,13 @@ const SplashScreen = () => {
 
         {/* Right Side - Feature Card */}
         <motion.div
-          className="lg:w-1/2 max-w-md w-full"
+          className="lg:w-1/2 max-w-md w-full px-4 sm:px-0"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           {/* Feature Carousel - Hidden on mobile */}
-          <div className="w-full hidden md:block">
+          <div className="w-full hidden sm:block">
             <div className="relative h-64">
               <AnimatePresence mode="wait">
                 <motion.div

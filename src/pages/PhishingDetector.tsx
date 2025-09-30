@@ -86,42 +86,42 @@ const PhishingDetector = () => {
 
   return (
     <div className="min-h-screen bg-gradient-cyber">
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Header */}
-        <div className="flex items-center mb-8">
+        <div className="flex items-center mb-6 sm:mb-8">
           <Button
             onClick={() => navigate('/dashboard')}
             variant="ghost"
             size="icon"
-            className="mr-4 text-muted-foreground hover:text-white"
+            className="mr-3 sm:mr-4 text-muted-foreground hover:text-white p-3 sm:p-2 touch-manipulation"
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
           <div>
-            <h1 className="text-2xl font-cyber font-bold text-white">
+            <h1 className="text-xl sm:text-2xl font-cyber font-bold text-white">
               Phishing & Scam Detector
             </h1>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-xs sm:text-sm">
               Paste the message below to check if it's safe
             </p>
           </div>
         </div>
 
         {/* Input Section */}
-        <div className="glass-card rounded-2xl p-6 mb-6">
+        <div className="glass-card rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6">
           <div className="space-y-4">
             <Textarea
               placeholder="Paste email, SMS, or call text here..."
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              className="min-h-32 bg-input border-input-border focus:border-primary focus:glow-primary transition-all resize-none"
+              className="min-h-32 w-full max-w-full bg-input border-input-border focus:border-primary focus:glow-primary transition-all resize-none text-sm sm:text-base"
             />
             
             <div className="flex flex-col sm:flex-row gap-3">
               <Button
                 onClick={analyzeMessage}
                 disabled={analyzing || !inputText.trim()}
-                className="flex-1 bg-gradient-primary hover:glow-primary btn-cyber"
+                className="flex-1 bg-gradient-primary hover:glow-primary btn-cyber py-3 sm:py-2 text-sm sm:text-base touch-manipulation"
               >
                 {analyzing ? (
                   <>
@@ -135,7 +135,7 @@ const PhishingDetector = () => {
               
               <Button
                 variant="outline"
-                className="border-border hover:bg-secondary/50"
+                className="border-border hover:bg-secondary/50 py-3 sm:py-2 text-sm sm:text-base touch-manipulation"
               >
                 <Upload className="h-4 w-4 mr-2" />
                 Upload File
@@ -146,45 +146,45 @@ const PhishingDetector = () => {
 
         {/* Analysis Result */}
         {result && (
-          <div className="glass-card rounded-2xl p-6 mb-6 animate-slide-up">
-            <div className="flex items-start space-x-4">
+          <div className="glass-card rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 animate-slide-up">
+            <div className="flex items-start space-x-3 sm:space-x-4">
               <div className={getStatusColor(result.status)}>
                 {(() => {
                   const Icon = getStatusIcon(result.status);
-                  return <Icon className="h-8 w-8 mt-1" />;
+                  return <Icon className="h-6 w-6 sm:h-8 sm:w-8 mt-1" />;
                 })()}
               </div>
               
               <div className="flex-1">
-                <div className="flex items-center space-x-3 mb-2">
-                  <h3 className={`text-xl font-cyber font-bold ${getStatusColor(result.status)}`}>
+                <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-3 mb-2">
+                  <h3 className={`text-lg sm:text-xl font-cyber font-bold ${getStatusColor(result.status)}`}>
                     {result.status.charAt(0).toUpperCase() + result.status.slice(1)}
                   </h3>
-                  <span className="bg-white/10 px-2 py-1 rounded text-sm text-white">
+                  <span className="bg-white/10 px-2 py-1 rounded text-xs sm:text-sm text-white w-fit">
                     {result.confidence}% confidence
                   </span>
                 </div>
                 
                 <div className="space-y-2">
                   {result.reasons.map((reason, index) => (
-                    <p key={index} className="text-muted-foreground text-sm">
+                    <p key={index} className="text-muted-foreground text-xs sm:text-sm">
                       • {reason}
                     </p>
                   ))}
                 </div>
                 
-                <div className="flex space-x-3 mt-4">
+                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 mt-4">
                   <Button
                     size="sm"
                     variant="outline"
-                    className="border-border hover:bg-secondary/50"
+                    className="border-border hover:bg-secondary/50 w-full sm:w-auto text-xs sm:text-sm py-2 touch-manipulation"
                   >
                     Save to History
                   </Button>
                   {result.status !== 'safe' && (
                     <Button
                       size="sm"
-                      className="bg-accent-phishing/20 text-accent-phishing hover:bg-accent-phishing/30"
+                      className="bg-accent-phishing/20 text-accent-phishing hover:bg-accent-phishing/30 w-full sm:w-auto text-xs sm:text-sm py-2 touch-manipulation"
                     >
                       Report Phishing
                     </Button>
@@ -196,24 +196,24 @@ const PhishingDetector = () => {
         )}
 
         {/* Recent Checks */}
-        <div className="glass-card rounded-2xl p-6">
-          <h3 className="text-lg font-cyber font-semibold text-white mb-4">
+        <div className="glass-card rounded-2xl p-4 sm:p-6 overflow-x-auto">
+          <h3 className="text-base sm:text-lg font-cyber font-semibold text-white mb-3 sm:mb-4">
             Recent Checks
           </h3>
           
           <div className="space-y-3">
             {recentChecks.map((check, index) => (
-              <div key={index} className="flex items-center space-x-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
+              <div key={index} className="flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
                 <div className={getStatusColor(check.status)}>
                   {(() => {
                     const Icon = getStatusIcon(check.status);
-                    return <Icon className="h-4 w-4" />;
+                    return <Icon className="h-4 w-4 flex-shrink-0" />;
                   })()}
                 </div>
-                <div className="flex-1">
-                  <p className="text-white text-sm truncate">{check.text}</p>
+                <div className="flex-1 min-w-0">
+                  <p className="text-white text-xs sm:text-sm truncate">{check.text}</p>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 flex-shrink-0">
                   <span className={`text-xs font-medium ${getStatusColor(check.status)}`}>
                     {check.status}
                   </span>
