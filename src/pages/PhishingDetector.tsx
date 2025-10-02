@@ -91,8 +91,40 @@ const PhishingDetector = () => {
 
     setAnalyzing(true);
     
-    // Simulate AI analysis
-    setTimeout(() => {
+    try {
+      // Call the AI-powered phishing detection API
+      const response = await fetch('/api/analyze-phishing', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text: inputText
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      const aiResult = await response.json();
+      
+      // Convert AI result to our component format
+      const status = aiResult.label as 'safe' | 'suspicious' | 'dangerous';
+      const confidence = Math.round(aiResult.confidence * 100);
+      const reasons = aiResult.explaination_steps || [aiResult.reason];
+
+      setResult({ status, confidence, reasons });
+      
+      toast({
+        title: "AI Analysis Complete",
+        description: `Message classified as ${status} (${confidence}% confidence)`,
+      });
+      
+    } catch (error) {
+      console.error('Analysis error:', error);
+      
+      // Fallback to basic analysis if API fails
       const suspiciousKeywords = ['urgent', 'click here', 'suspended', 'verify', 'winner', '$', 'prize'];
       const hasSuspiciousKeywords = suspiciousKeywords.some(keyword => 
         inputText.toLowerCase().includes(keyword)
@@ -105,22 +137,41 @@ const PhishingDetector = () => {
       if (hasSuspiciousKeywords) {
         if (inputText.toLowerCase().includes('suspended') || inputText.toLowerCase().includes('urgent')) {
           status = 'dangerous';
-          confidence = 92;
-          reasons = ['Contains urgent action keywords', 'Mimics official communication', 'Requests immediate action'];
+          confidence = 85;
+          reasons = [
+            'Contains threatening language about account suspension',
+            'Uses urgent language to create pressure',
+            'Requests immediate action'
+          ];
         } else {
           status = 'suspicious';
-          confidence = 75;
-          reasons = ['Contains promotional language', 'Unusual sender pattern'];
+          confidence = 70;
+          reasons = [
+            'Contains suspicious keywords',
+            'May be attempting to deceived users',
+            'Requires careful verification'
+          ];
         }
       } else {
         status = 'safe';
-        confidence = 95;
-        reasons = ['No suspicious patterns detected', 'Appears to be legitimate communication'];
+        confidence = 90;
+        reasons = [
+          'No suspicious patterns detected',
+          'Language appears legitimate',
+          'No immediate red flags found'
+        ];
       }
 
       setResult({ status, confidence, reasons });
+      
+      toast({
+        title: "Analysis Complete (Fallback)",
+        description: `Message classified as ${status} using basic analysis`,
+        variant: "default"
+      });
+    } finally {
       setAnalyzing(false);
-    }, 2000);
+    }
   };
 
   const getStatusColor = (status: string) => {
@@ -131,7 +182,6 @@ const PhishingDetector = () => {
       default: return 'text-white';
     }
   };
-
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'safe': return CheckCircle;
