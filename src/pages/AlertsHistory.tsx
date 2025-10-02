@@ -170,31 +170,31 @@ const AlertsHistory = () => {
 
         {/* Search and Filter */}
         <div className="glass-card rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
-          <div className="flex flex-col space-y-4 sm:space-y-0">
+          <div className="flex flex-col space-y-6">
             {/* Search Bar - Full width on mobile */}
-            <div className="relative w-full sm:max-w-md sm:mb-4 lg:mb-0">
+            <div className="relative w-full sm:max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Search alerts..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-input border-input-border focus:border-primary text-sm sm:text-base w-full"
+                className="pl-10 bg-input border-input-border focus:border-primary text-sm sm:text-base w-full h-12"
               />
             </div>
             
-            {/* Filter Tabs - Horizontal scrollable on mobile */}
+            {/* Filter Tabs - Horizontal scrollable on mobile with proper spacing */}
             <div className="w-full">
-              <div className="flex overflow-x-auto gap-2 pb-2 sm:pb-0 scrollbar-hide" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+              <div className="flex overflow-x-auto gap-3 pb-2 sm:pb-0 scrollbar-hide" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
                 {filterOptions.map((option) => (
                   <Button
                     key={option.value}
                     variant={selectedFilter === option.value ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedFilter(option.value)}
-                    className={`flex-shrink-0 whitespace-nowrap text-xs sm:text-sm transition-all duration-200 ${
+                    className={`flex-shrink-0 whitespace-nowrap text-xs sm:text-sm transition-all duration-200 px-4 py-2 h-10 ${
                       selectedFilter === option.value
-                        ? "bg-primary text-primary-foreground shadow-lg border-primary"
-                        : "border-border hover:bg-secondary/50 hover:border-primary/50"
+                        ? "bg-primary text-primary-foreground shadow-lg border-primary hover:bg-primary/90"
+                        : "border-border hover:bg-secondary/50 hover:border-primary/50 hover:scale-105"
                     }`}
                   >
                     {option.label}

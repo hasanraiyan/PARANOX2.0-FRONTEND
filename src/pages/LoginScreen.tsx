@@ -50,6 +50,32 @@ const LoginScreen = () => {
       {/* Glass Morphism Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/80 backdrop-blur-3xl -z-10"></div>
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,255,255,0.1),transparent_50%)] bg-[radial-gradient(circle_at_70%_80%,rgba(0,255,136,0.08),transparent_50%)] -z-10"></div>
+      
+      {/* Top Navigation Bar */}
+      <div className="relative z-20 flex items-center justify-between p-4 sm:p-6 md:p-8">
+        {/* Left side - Back button (unchanged) */}
+        <div>
+          {/* Back to Home button - clean minimal design */}
+          <Button
+            onClick={() => navigate('/')}
+            variant="ghost"
+            className="text-gray-300 hover:text-white transition-all duration-300 hover:bg-white/5 backdrop-blur-sm px-3 py-2 rounded-lg group touch-manipulation flex items-center gap-2"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            {/* Show "Back" on small screens, "Back to Home" on larger screens */}
+            <span className="text-sm font-medium sm:hidden">Back</span>
+            <span className="text-sm font-medium hidden sm:inline group-hover:underline underline-offset-2">Back to Home</span>
+          </Button>
+        </div>
+        
+        {/* Right side - PARANOX Logo/Brand */}
+        <div className="flex items-center space-x-3">
+          <div className="p-2 rounded-xl bg-gradient-to-br from-primary/20 to-accent-password/20 backdrop-blur-sm border border-white/10">
+            <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+          </div>
+          <span className="text-base sm:text-lg font-cyber font-bold text-white hidden sm:block">PARANOX</span>
+        </div>
+      </div>
 
       <div className="flex-1 flex flex-col lg:flex-row items-center justify-center px-4 sm:px-6 py-8 sm:py-12 relative z-10 max-w-7xl mx-auto w-full min-h-[80vh]">
         {/* Left Side - Features */}
@@ -154,21 +180,6 @@ const LoginScreen = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          {/* Back Button */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Button
-              onClick={() => navigate('/')}
-              variant="ghost"
-              className="mb-8 text-white/70 hover:text-primary transition-all duration-300 hover:bg-white/5 backdrop-blur-sm px-4 py-2 rounded-lg"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
-            </Button>
-          </motion.div>
 
           {/* Logo & Title */}
           <motion.div

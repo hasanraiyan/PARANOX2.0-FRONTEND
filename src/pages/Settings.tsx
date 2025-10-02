@@ -98,13 +98,13 @@ const Settings = () => {
           >
             <ArrowLeft className="h-6 w-6" />
           </Button>
-          <div className="glass-card p-4 sm:p-6 rounded-2xl border border-white/10">
+          <div className="p-4 sm:p-6">
             <h1 className="text-2xl sm:text-3xl font-cyber font-bold text-white">
               Settings
             </h1>
-            <p className="text-white/70 mt-2 text-sm sm:text-base">
+            {/* <p className="text-white/70 mt-2 text-sm sm:text-base">
               Manage your account and preferences
-            </p>
+            </p> */}
           </div>
         </motion.div>
 
@@ -114,80 +114,96 @@ const Settings = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="glass-card rounded-xl p-4 sm:p-6 border-2 border-white/10 shadow-xl shadow-black/20"
+            className="glass-card rounded-xl p-6 sm:p-8 border-2 border-white/10 shadow-xl shadow-black/20 backdrop-blur-sm"
           >
-            <div className="flex items-center space-x-3 sm:space-x-4 mb-6 sm:mb-8">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
-                <User className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+            <div className="flex items-center space-x-4 mb-8">
+              <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
+                <User className="h-6 w-6 text-primary" />
               </div>
-              <h2 className="text-base sm:text-lg font-cyber font-semibold text-white">
+              <h2 className="text-xl font-cyber font-semibold text-white">
                 Profile Information
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-              >
-                <Label htmlFor="name" className="text-white font-semibold text-sm sm:text-base mb-3 block">
-                  Full Name
-                </Label>
-                <Input
-                  id="name"
-                  value={profile.name}
-                  onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                  className="w-full max-w-md mx-auto bg-white/5 border-white/10 rounded-xl px-4 py-3 sm:py-4 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all duration-300 hover:border-white/20 text-sm sm:text-base"
-                />
-              </motion.div>
+            {/* Form Container */}
+            <div className="bg-white/5 rounded-xl p-6 sm:p-8 border border-white/10 shadow-inner">
+              <div className="space-y-6">
+                {/* Desktop: 2-column grid, Mobile: single column */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                  {/* Full Name */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3, duration: 0.6 }}
+                    className="space-y-3"
+                  >
+                    <Label htmlFor="name" className="text-white/80 font-medium text-sm block">
+                      Full Name
+                    </Label>
+                    <Input
+                      id="name"
+                      value={profile.name}
+                      onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+                      className="w-full bg-white/10 border-white/20 rounded-lg px-4 py-3 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all duration-300 hover:border-white/30 hover:bg-white/15 text-base"
+                      placeholder="Enter your full name"
+                    />
+                  </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-              >
-                <Label htmlFor="email" className="text-white font-semibold text-sm sm:text-base mb-3 block">
-                  Email Address
-                </Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={profile.email}
-                  onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                  className="w-full max-w-md mx-auto bg-white/5 border-white/10 rounded-xl px-4 py-3 sm:py-4 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all duration-300 hover:border-white/20 text-sm sm:text-base"
-                />
-              </motion.div>
+                  {/* Email Address */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4, duration: 0.6 }}
+                    className="space-y-3"
+                  >
+                    <Label htmlFor="email" className="text-white/80 font-medium text-sm block">
+                      Email Address
+                    </Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={profile.email}
+                      onChange={(e) => setProfile({ ...profile, email: e.target.value })}
+                      className="w-full bg-white/10 border-white/20 rounded-lg px-4 py-3 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all duration-300 hover:border-white/30 hover:bg-white/15 text-base"
+                      placeholder="Enter your email address"
+                    />
+                  </motion.div>
+                </div>
 
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5, duration: 0.6 }}
-              >
-                <Label htmlFor="phone" className="text-white font-semibold text-sm sm:text-base mb-3 block">
-                  Phone Number
-                </Label>
-                <Input
-                  id="phone"
-                  value={profile.phone}
-                  onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-                  className="w-full max-w-md mx-auto bg-white/5 border-white/10 rounded-xl px-4 py-3 sm:py-4 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all duration-300 hover:border-white/20 text-sm sm:text-base"
-                />
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-                className="flex items-end"
-              >
-                <Button
-                  onClick={handleProfileUpdate}
-                  className="w-full sm:w-auto bg-gradient-to-r from-primary to-accent-password hover:from-primary/90 hover:to-accent-password/90 text-white text-sm sm:text-base py-3 sm:py-4 px-6 sm:px-8 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-primary/30 touch-manipulation"
+                {/* Phone Number - Full width on mobile, left column on desktop */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5, duration: 0.6 }}
+                  className="space-y-3 md:w-1/2 md:pr-4"
                 >
-                  Update Profile
-                </Button>
-              </motion.div>
+                  <Label htmlFor="phone" className="text-white/80 font-medium text-sm block">
+                    Phone Number
+                  </Label>
+                  <Input
+                    id="phone"
+                    value={profile.phone}
+                    onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
+                    className="w-full bg-white/10 border-white/20 rounded-lg px-4 py-3 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all duration-300 hover:border-white/30 hover:bg-white/15 text-base"
+                    placeholder="Enter your phone number"
+                  />
+                </motion.div>
+
+                {/* Update Button - Centered below form */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.6 }}
+                  className="flex justify-center md:justify-end pt-4"
+                >
+                  <Button
+                    onClick={handleProfileUpdate}
+                    className="bg-gradient-to-r from-primary to-accent-password hover:from-primary/90 hover:to-accent-password/90 text-white font-semibold px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/50 touch-manipulation min-w-[160px]"
+                  >
+                    Update Profile
+                  </Button>
+                </motion.div>
+              </div>
             </div>
           </motion.div>
 
