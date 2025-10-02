@@ -14,6 +14,7 @@ import SafetyMode from "./pages/SafetyMode";
 import GamesHub from "./pages/GamesHub";
 import AlertsHistory from "./pages/AlertsHistory";
 import Settings from "./pages/Settings";
+import ProfileDemo from "./pages/ProfileDemo";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -62,6 +63,7 @@ const App = () => {
               <Route path="/games-hub" element={<GamesHub />} />
               <Route path="/alerts" element={<AlertsHistory />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/profile-demo" element={<ProfileDemo />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

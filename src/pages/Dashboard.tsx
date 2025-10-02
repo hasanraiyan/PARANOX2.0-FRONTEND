@@ -230,30 +230,41 @@ const Dashboard = () => {
           transition={{ delay: 1.0, duration: 0.8 }}
           className="glass-card rounded-3xl p-4 sm:p-6 border-2 border-white/10 shadow-xl shadow-black/20"
         >
-          <div className="flex justify-around">
-            <Button
-              variant="ghost"
-              className="flex flex-col items-center space-y-1 sm:space-y-2 text-primary bg-primary/10 p-3 sm:p-4 rounded-2xl border border-primary/20 touch-manipulation"
-            >
-              <Shield className="h-5 w-5 sm:h-6 sm:w-6" />
-              <span className="text-xs sm:text-sm font-medium">Dashboard</span>
-            </Button>
-            <Button
-              onClick={() => navigate('/alerts')}
-              variant="ghost"
-              className="flex flex-col items-center space-y-1 sm:space-y-2 text-white/70 hover:text-primary transition-all duration-300 p-3 sm:p-4 rounded-2xl hover:bg-white/5 touch-manipulation"
-            >
-              <Bell className="h-5 w-5 sm:h-6 sm:w-6" />
-              <span className="text-xs sm:text-sm font-medium">Alerts</span>
-            </Button>
-            <Button
-              onClick={() => navigate('/settings')}
-              variant="ghost"
-              className="flex flex-col items-center space-y-1 sm:space-y-2 text-white/70 hover:text-primary transition-all duration-300 p-3 sm:p-4 rounded-2xl hover:bg-white/5 touch-manipulation"
-            >
-              <Settings className="h-5 w-5 sm:h-6 sm:w-6" />
-              <span className="text-xs sm:text-sm font-medium">Settings</span>
-            </Button>
+          <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-6">
+            {/* Dashboard Nav Item */}
+            <div className="bg-primary/10 backdrop-blur-sm rounded-2xl border border-primary/20 shadow-lg shadow-primary/10 hover:bg-primary/20 hover:scale-105 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300">
+              <Button
+                variant="ghost"
+                className="flex items-center gap-2 text-primary p-3 sm:p-4 rounded-2xl touch-manipulation hover:bg-transparent min-w-[90px] sm:min-w-[110px] justify-center"
+              >
+                <Shield className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="text-xs sm:text-sm font-medium">Dashboard</span>
+              </Button>
+            </div>
+
+            {/* Alerts Nav Item */}
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 shadow-lg hover:bg-primary/10 hover:scale-105 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300">
+              <Button
+                onClick={() => navigate('/alerts')}
+                variant="ghost"
+                className="flex items-center gap-2 text-white/70 hover:text-primary p-3 sm:p-4 rounded-2xl touch-manipulation hover:bg-transparent min-w-[90px] sm:min-w-[110px] justify-center transition-colors duration-300"
+              >
+                <Bell className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="text-xs sm:text-sm font-medium">Alerts</span>
+              </Button>
+            </div>
+
+            {/* Settings Nav Item */}
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 shadow-lg hover:bg-primary/10 hover:scale-105 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300">
+              <Button
+                onClick={() => navigate('/settings')}
+                variant="ghost"
+                className="flex items-center gap-2 text-white/70 hover:text-primary p-3 sm:p-4 rounded-2xl touch-manipulation hover:bg-transparent min-w-[90px] sm:min-w-[110px] justify-center transition-colors duration-300"
+              >
+                <Settings className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="text-xs sm:text-sm font-medium">Settings</span>
+              </Button>
+            </div>
           </div>
         </motion.div>
       </div>
