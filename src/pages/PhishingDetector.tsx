@@ -16,17 +16,74 @@ const PhishingDetector = () => {
   const [inputText, setInputText] = useState("");
   const [analyzing, setAnalyzing] = useState(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [recentChecks] = useState([
     { text: "Your bank account has been suspended...", status: 'dangerous', time: '2h ago' },
     { text: "Meeting reminder from Calendar", status: 'safe', time: '1d ago' },
     { text: "Win $1000 now! Click here!", status: 'suspicious', time: '2d ago' }
   ]);
 
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Check file type
+    const allowedTypes = ['text/plain', 'image/png', 'image/jpeg', 'image/jpg', 'application/pdf'];
+    if (!allowedTypes.includes(file.type)) {
+      toast({
+        title: "Invalid File Type",
+        description: "Please upload a text file, image (PNG/JPG), or PDF",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Check file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: "File Too Large",
+        description: "Please upload a file smaller than 5MB",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setUploadedFile(file);
+
+    // Read file content
+    if (file.type === 'text/plain') {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const content = e.target?.result as string;
+        setInputText(content);
+        toast({
+          title: "File Uploaded",
+          description: `Successfully loaded ${file.name}`,
+        });
+      };
+      reader.readAsText(file);
+    } else if (file.type.startsWith('image/')) {
+      // For images, we'll simulate OCR text extraction
+      setInputText(`[Image file uploaded: ${file.name}]\n\nSimulated OCR text extraction:\n"Congratulations! You've won $1000! Click here to claim your prize now! Urgent action required within 24 hours or you'll lose this amazing opportunity!"`); 
+      toast({
+        title: "Image Uploaded",
+        description: `Processing ${file.name} with OCR...`,
+      });
+    } else if (file.type === 'application/pdf') {
+      // For PDFs, simulate text extraction
+      setInputText(`[PDF file uploaded: ${file.name}]\n\nSimulated PDF text extraction:\n"URGENT: Your account will be suspended! Verify your identity immediately by clicking this link and entering your personal information."`); 
+      toast({
+        title: "PDF Uploaded",
+        description: `Processing ${file.name}...`,
+      });
+    }
+  };
+
   const analyzeMessage = async () => {
     if (!inputText.trim()) {
       toast({
         title: "Error",
-        description: "Please enter some text to analyze",
+        description: "Please enter some text to analyze or upload a file",
         variant: "destructive"
       });
       return;
@@ -110,6 +167,27 @@ const PhishingDetector = () => {
         {/* Input Section */}
         <div className="glass-card rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6">
           <div className="space-y-4">
+            {/* File Upload Status */}
+            {uploadedFile && (
+              <div className="flex items-center justify-between p-3 bg-primary/10 border border-primary/20 rounded-lg">
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-primary" />
+                  <span className="text-sm text-white">File uploaded: {uploadedFile.name}</span>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    setUploadedFile(null);
+                    setInputText("");
+                  }}
+                  className="text-white/70 hover:text-white"
+                >
+                  ✕
+                </Button>
+              </div>
+            )}
+            
             <Textarea
               placeholder="Paste email, SMS, or call text here..."
               value={inputText}
@@ -133,13 +211,23 @@ const PhishingDetector = () => {
                 )}
               </Button>
               
-              <Button
-                variant="outline"
-                className="border-border hover:bg-secondary/50 py-3 sm:py-2 text-sm sm:text-base touch-manipulation"
-              >
-                <Upload className="h-4 w-4 mr-2" />
-                Upload File
-              </Button>
+              <div className="relative">
+                <input
+                  type="file"
+                  id="file-upload"
+                  accept=".txt,.png,.jpg,.jpeg,.pdf"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                />
+                <Button
+                  variant="outline"
+                  className="border-border hover:bg-secondary/50 py-3 sm:py-2 text-sm sm:text-base touch-manipulation"
+                  onClick={() => document.getElementById('file-upload')?.click()}
+                >
+                  <Upload className="h-4 w-4 mr-2" />
+                  Upload File
+                </Button>
+              </div>
             </div>
           </div>
         </div>
