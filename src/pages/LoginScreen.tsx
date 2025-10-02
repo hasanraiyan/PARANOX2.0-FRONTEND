@@ -69,7 +69,7 @@ const LoginScreen = () => {
         <div className="p-2 rounded-xl bg-gradient-to-br from-primary/20 to-accent-password/20 backdrop-blur-sm border border-white/10">
           <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
         </div>
-        <span className="text-base sm:text-lg font-cyber font-bold text-white hidden sm:block">PARANOX</span>
+        <span className="text-base sm:text-lg font-cyber font-bold text-white hidden sm:block">CyberGuardian</span>
       </div>
 
       {/* Main Container */}
