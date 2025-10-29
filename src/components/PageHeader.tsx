@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface PageHeaderProps {
   title: string;
@@ -17,38 +18,34 @@ export const PageHeader = ({
 }: PageHeaderProps) => {
   const navigate = useNavigate();
 
-  const titleClass = responsive 
-    ? "text-xl sm:text-2xl font-cyber font-bold text-white"
-    : "text-2xl font-cyber font-bold text-white";
-  
-  const subtitleClass = responsive 
-    ? "text-muted-foreground text-xs sm:text-sm"
-    : "text-muted-foreground text-sm";
-
-  const buttonClass = responsive
-    ? "mr-3 sm:mr-4 text-muted-foreground hover:text-white p-3 sm:p-2 touch-manipulation"
-    : "mr-4 text-muted-foreground hover:text-white";
-
-  const containerClass = responsive
-    ? "flex items-center mb-6 sm:mb-8"
-    : "flex items-center mb-8";
-
   return (
-    <div className={containerClass}>
+    <div className={cn(
+      "flex items-center",
+      responsive ? "mb-6 sm:mb-8" : "mb-8"
+    )}>
       <Button
         onClick={() => navigate(backRoute)}
         variant="ghost"
         size="icon"
-        className={buttonClass}
+        className={cn(
+          "text-muted-foreground hover:text-white",
+          responsive ? "mr-3 sm:mr-4 p-3 sm:p-2 touch-manipulation" : "mr-4"
+        )}
       >
         <ArrowLeft className="h-5 w-5" />
       </Button>
       <div>
-        <h1 className={titleClass}>
+        <h1 className={cn(
+          "font-cyber font-bold text-white",
+          responsive ? "text-xl sm:text-2xl" : "text-2xl"
+        )}>
           {title}
         </h1>
         {subtitle && (
-          <p className={subtitleClass}>
+          <p className={cn(
+            "text-muted-foreground",
+            responsive ? "text-xs sm:text-sm" : "text-sm"
+          )}>
             {subtitle}
           </p>
         )}
