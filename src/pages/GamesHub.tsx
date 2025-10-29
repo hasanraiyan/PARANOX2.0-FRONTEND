@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Gamepad2, Trophy, Star, Play, Lock, Zap } from "lucide-react";
+import { Gamepad2, Trophy, Star, Play, Lock, Zap } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { getDifficultyColor, getBadgeColor } from "@/lib/statusHelpers";
+import { PageHeader } from "@/components/PageHeader";
 
 interface Game {
   id: string;
@@ -107,25 +109,6 @@ const GamesHub = () => {
         description: `You earned ${game.xp} XP!`,
       });
     }, 2000);
-  };
-
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'easy': return 'text-accent-password';
-      case 'medium': return 'text-accent-safety';
-      case 'hard': return 'text-accent-phishing';
-      default: return 'text-white';
-    }
-  };
-
-  const getBadgeColor = (badge: string) => {
-    switch (badge) {
-      case 'Expert': return 'bg-accent-phishing text-white';
-      case 'Advanced': return 'bg-accent-password text-white';
-      case 'Intermediate': return 'bg-accent-safety text-black';
-      case 'Beginner': return 'bg-muted text-white';
-      default: return 'bg-muted text-white';
-    }
   };
 
   return (

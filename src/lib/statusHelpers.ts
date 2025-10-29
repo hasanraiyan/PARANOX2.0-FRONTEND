@@ -135,3 +135,40 @@ export function getProgressColor(strength: string): string {
       return 'bg-gray-500';
   }
 }
+
+/**
+ * Get the color class for game difficulty level
+ * Used in games hub
+ */
+export function getDifficultyColor(difficulty: string): string {
+  switch (difficulty) {
+    case 'easy':
+      return 'text-accent-password';
+    case 'medium':
+      return 'text-accent-safety';
+    case 'hard':
+      return 'text-accent-phishing';
+    default:
+      return 'text-white';
+  }
+}
+
+/**
+ * Get the badge color class for user level/badge
+ * Used in games hub
+ */
+export function getBadgeColor(badge: string): string {
+  switch (badge) {
+    case 'Expert':
+      return 'bg-accent-phishing text-white';
+    case 'Advanced':
+      return 'bg-accent-password text-white';
+    case 'Intermediate':
+      return 'bg-accent-safety text-black';
+    case 'Beginner':
+      return 'bg-muted text-white';
+    default:
+      return 'bg-muted text-white';
+  }
+}
+
