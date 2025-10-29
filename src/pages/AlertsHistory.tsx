@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, Bell, Search, Filter, Shield, AlertTriangle, CheckCircle, Clock, Eye } from "lucide-react";
+import { ArrowLeft, Search, Clock, Eye, Bell } from "lucide-react";
+import { getTypeIcon, getTypeColor, getStatusColor, getSeverityColor } from "@/lib/statusHelpers";
 
 interface Alert {
   id: string;
@@ -84,46 +85,6 @@ const AlertsHistory = () => {
       severity: 'low'
     }
   ]);
-
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case 'phishing': return Shield;
-      case 'password': return CheckCircle;
-      case 'safety': return Eye;
-      case 'system': return Bell;
-      default: return Bell;
-    }
-  };
-
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case 'phishing': return 'text-accent-phishing';
-      case 'password': return 'text-accent-password';
-      case 'safety': return 'text-accent-safety';
-      case 'system': return 'text-primary';
-      default: return 'text-white';
-    }
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'blocked': return 'bg-accent-phishing/20 text-accent-phishing';
-      case 'flagged': return 'bg-accent-safety/20 text-accent-safety';
-      case 'resolved': return 'bg-accent-password/20 text-accent-password';
-      case 'safe': return 'bg-primary/20 text-primary';
-      default: return 'bg-muted/20 text-muted-foreground';
-    }
-  };
-
-  const getSeverityColor = (severity: string) => {
-    switch (severity) {
-      case 'critical': return 'border-l-accent-phishing';
-      case 'high': return 'border-l-accent-phishing/70';
-      case 'medium': return 'border-l-accent-safety';
-      case 'low': return 'border-l-accent-password';
-      default: return 'border-l-muted';
-    }
-  };
 
   const filteredAlerts = alerts.filter(alert => {
     const matchesSearch = alert.title.toLowerCase().includes(searchTerm.toLowerCase()) ||

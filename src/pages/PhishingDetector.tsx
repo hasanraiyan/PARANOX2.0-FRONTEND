@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Shield, AlertTriangle, CheckCircle, Upload, Loader2 } from "lucide-react";
+import { ArrowLeft, Upload, Loader2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { getStatusColor, getStatusIcon } from "@/lib/statusHelpers";
 
 interface AnalysisResult {
   status: 'safe' | 'suspicious' | 'dangerous';
@@ -174,22 +175,7 @@ const PhishingDetector = () => {
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'safe': return 'text-accent-password';
-      case 'suspicious': return 'text-accent-safety';
-      case 'dangerous': return 'text-accent-phishing';
-      default: return 'text-white';
-    }
-  };
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'safe': return CheckCircle;
-      case 'suspicious': return AlertTriangle;
-      case 'dangerous': return Shield;
-      default: return Shield;
-    }
-  };
+
 
   return (
     <div className="min-h-screen bg-gradient-cyber">

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Eye, EyeOff, AlertTriangle, CheckCircle, Shield, Key, Zap } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { getStrengthColor, getProgressColor } from "@/lib/statusHelpers";
 
 interface PasswordAnalysis {
   strength: 'weak' | 'medium' | 'strong' | 'very-strong';
@@ -87,26 +88,6 @@ const PasswordChecker = () => {
       });
       setAnalyzing(false);
     }, 1500);
-  };
-
-  const getStrengthColor = (strength: string) => {
-    switch (strength) {
-      case 'weak': return 'text-accent-phishing';
-      case 'medium': return 'text-accent-safety';
-      case 'strong': return 'text-accent-password';
-      case 'very-strong': return 'text-primary';
-      default: return 'text-white';
-    }
-  };
-
-  const getProgressColor = (strength: string) => {
-    switch (strength) {
-      case 'weak': return 'bg-accent-phishing';
-      case 'medium': return 'bg-accent-safety';
-      case 'strong': return 'bg-accent-password';
-      case 'very-strong': return 'bg-primary';
-      default: return 'bg-gray-500';
-    }
   };
 
   return (
