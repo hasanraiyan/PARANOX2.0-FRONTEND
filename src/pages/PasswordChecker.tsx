@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Eye, EyeOff, AlertTriangle, CheckCircle, Shield, Key, Zap } from "lucide-react";
+import { Eye, EyeOff, AlertTriangle, CheckCircle, Shield, Key, Zap } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { getStrengthColor, getProgressColor } from "@/lib/statusHelpers";
+import { PageHeader } from "@/components/PageHeader";
 
 interface PasswordAnalysis {
   strength: 'weak' | 'medium' | 'strong' | 'very-strong';
@@ -89,48 +91,13 @@ const PasswordChecker = () => {
     }, 1500);
   };
 
-  const getStrengthColor = (strength: string) => {
-    switch (strength) {
-      case 'weak': return 'text-accent-phishing';
-      case 'medium': return 'text-accent-safety';
-      case 'strong': return 'text-accent-password';
-      case 'very-strong': return 'text-primary';
-      default: return 'text-white';
-    }
-  };
-
-  const getProgressColor = (strength: string) => {
-    switch (strength) {
-      case 'weak': return 'bg-accent-phishing';
-      case 'medium': return 'bg-accent-safety';
-      case 'strong': return 'bg-accent-password';
-      case 'very-strong': return 'bg-primary';
-      default: return 'bg-gray-500';
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-cyber">
       <div className="container mx-auto px-6 py-8">
-        {/* Header */}
-        <div className="flex items-center mb-8">
-          <Button
-            onClick={() => navigate('/dashboard')}
-            variant="ghost"
-            size="icon"
-            className="mr-4 text-muted-foreground hover:text-white"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
-          <div>
-            <h1 className="text-2xl font-cyber font-bold text-white">
-              Password & Leak Checker
-            </h1>
-            <p className="text-muted-foreground text-sm">
-              Check your password strength and data breach status
-            </p>
-          </div>
-        </div>
+        <PageHeader 
+          title="Password & Leak Checker"
+          subtitle="Check your password strength and data breach status"
+        />
 
         {/* Password Input */}
         <div className="glass-card rounded-2xl p-6 mb-6">

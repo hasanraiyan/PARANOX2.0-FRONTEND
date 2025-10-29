@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Shield, AlertTriangle, CheckCircle, Upload, Loader2 } from "lucide-react";
+import { Upload, Loader2, CheckCircle } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { getStatusColor, getStatusIcon } from "@/lib/statusHelpers";
+import { PageHeader } from "@/components/PageHeader";
 
 interface AnalysisResult {
   status: 'safe' | 'suspicious' | 'dangerous';
@@ -174,45 +176,16 @@ const PhishingDetector = () => {
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'safe': return 'text-accent-password';
-      case 'suspicious': return 'text-accent-safety';
-      case 'dangerous': return 'text-accent-phishing';
-      default: return 'text-white';
-    }
-  };
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'safe': return CheckCircle;
-      case 'suspicious': return AlertTriangle;
-      case 'dangerous': return Shield;
-      default: return Shield;
-    }
-  };
+
 
   return (
     <div className="min-h-screen bg-gradient-cyber">
       <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
-        {/* Header */}
-        <div className="flex items-center mb-6 sm:mb-8">
-          <Button
-            onClick={() => navigate('/dashboard')}
-            variant="ghost"
-            size="icon"
-            className="mr-3 sm:mr-4 text-muted-foreground hover:text-white p-3 sm:p-2 touch-manipulation"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
-          <div>
-            <h1 className="text-xl sm:text-2xl font-cyber font-bold text-white">
-              Phishing & Scam Detector
-            </h1>
-            <p className="text-muted-foreground text-xs sm:text-sm">
-              Paste the message below to check if it's safe
-            </p>
-          </div>
-        </div>
+        <PageHeader 
+          title="Phishing & Scam Detector"
+          subtitle="Paste the message below to check if it's safe"
+          responsive
+        />
 
         {/* Input Section */}
         <div className="glass-card rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6">

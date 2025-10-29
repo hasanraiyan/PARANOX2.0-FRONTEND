@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { ArrowLeft, Shield, Users, Eye, AlertTriangle, Clock } from "lucide-react";
+import { Shield, Users, Eye, AlertTriangle, Clock } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { PageHeader } from "@/components/PageHeader";
 
 const SafetyMode = () => {
   const navigate = useNavigate();
@@ -53,25 +54,10 @@ const SafetyMode = () => {
   return (
     <div className="min-h-screen bg-gradient-cyber">
       <div className="container mx-auto px-6 py-8">
-        {/* Header */}
-        <div className="flex items-center mb-8">
-          <Button
-            onClick={() => navigate('/dashboard')}
-            variant="ghost"
-            size="icon"
-            className="mr-4 text-muted-foreground hover:text-white"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
-          <div>
-            <h1 className="text-2xl font-cyber font-bold text-white">
-              Safety Mode
-            </h1>
-            <p className="text-muted-foreground text-sm">
-              Configure protection for safe browsing and online interactions
-            </p>
-          </div>
-        </div>
+        <PageHeader 
+          title="Safety Mode"
+          subtitle="Configure protection for safe browsing and online interactions"
+        />
 
         {/* Safety Settings */}
         <div className="space-y-6 mb-8">
